@@ -1,0 +1,39 @@
+#######################################
+# Syntax Coloring Map For RedBotHelpers
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+RedBotHelpers	KEYWORD1
+RedBot	KEYWORD1
+Speed	KEYWORD1
+Time	KEYWORD1
+Angle	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+RedBot	KEYWORD2
+get_motors	KEYWORD2
+get_encoder	KEYWORD2
+move_forward	KEYWORD2
+move_backward	KEYWORD2
+init	KEYWORD2
+
+forward	KEYWORD2
+backward	KEYWORD2
+
+pivot_right	KEYWORD2
+pivot_left	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+LED_PIN	KEYWORD2
+COUNTS_PER_REV	KEYWORD2
+LEFT_ENCODER_PIN	KEYWORD2
+RIGHT_ENCODER_PIN	KEYWORD2

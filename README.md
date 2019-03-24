@@ -16,9 +16,9 @@ ln -s /abs/path/to/redbot_helpers /home/$USER/Arduino/libraries/redbot_helpers
 **Note:** This library depends on the SparkFun RedBot library
 
 ## Basic Usage
-```
+```C++
 // examples/hello_redbots/hello_redbots.ino
-#include <redbot_helpers.hh>
+#include <RedBotHelpers.h>
 
 auto my_redbot = redbot::init();
 

@@ -25,8 +25,8 @@ public:
   RedBotMotors& get_motors();
   RedBotEncoder& get_encoder();
 
-  void move_forward(const Speed s, const Time t);
-  void move_backward(const Speed s, const Time t);
+  void move_forward(const Speed, const Time);
+  void move_backward(const Speed, const Time);
 
 private:
   RedBotMotors motors_;
@@ -46,13 +46,13 @@ namespace move
 /// @param  Speed   The power for the motors (0 - 255)
 /// @param  Time    The duration the redbot should go forward (milliseconds)
 // void forward(RedBotMotors& motors, const Speed, const Time);
-void forward(RedBot& rb, const Speed, const Time);
+void forward(RedBot&, const Speed, const Time);
 
 /// Function to move redbot forward
 /// @param  Speed    The power for the motors (0 - 255)
 /// @param  Time     The duration the redbot should go forward (milliseconds)
 // void backward(RedBotMotors& motors, const Speed, const Time);
-void backward(RedBot& rb, const Speed, const Time);
+void backward(RedBot&, const Speed, const Time);
 
 }  // namespace move
 
@@ -62,22 +62,22 @@ namespace experimental
 namespace v1
 {
 
-void pivot_right(RedBot& rb, const Angle);
-void pivot_right(RedBot& rb, const Speed, const Angle);
+void pivot_right(RedBot&, const Angle);
+void pivot_right(RedBot&, const Speed, const Angle);
 
-void pivot_left(RedBot& rb, const Angle);
-void pivot_left(RedBot& rb, const Speed, const Angle);
+void pivot_left(RedBot&, const Angle);
+void pivot_left(RedBot&, const Speed, const Angle);
 
 }  // namespace v1
 
 namespace v2
 {
 
-void pivot_right(RedBot& rb, const Angle);
-void pivot_right(RedBot& rb, const Speed, const Angle);
+void pivot_right(RedBot&, const Angle);
+void pivot_right(RedBot&, const Speed, const Angle);
 
-void pivot_left(RedBot& rb, const Angle);
-void pivot_left(RedBot& rb, const Speed, const Angle);
+void pivot_left(RedBot&, const Angle);
+void pivot_left(RedBot&, const Speed, const Angle);
 
 }  // namespace v2
 

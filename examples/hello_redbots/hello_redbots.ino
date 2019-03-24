@@ -1,4 +1,4 @@
-#include <redbot_helpers.hh>
+#include <RedBotHelpers.h>
 
 auto gonk = redbot::init();
 

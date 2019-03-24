@@ -2,7 +2,7 @@
 #ifndef REDBOT_HELPERS_H_
 #define REDBOT_HELPERS_H_
 
-#include "include/redbot_helpers_impl.hh"
+#include "include/RedBotHelpersImpl.hh"
 
 using redbot::Speed;
 using redbot::Time;

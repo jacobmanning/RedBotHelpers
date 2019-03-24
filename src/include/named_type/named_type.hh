@@ -18,6 +18,6 @@ private:
   T value_;
 };
 
-#include "named_type_v3.hh"
+#include "named_type_impl.hh"
 
 }  // namespace util
