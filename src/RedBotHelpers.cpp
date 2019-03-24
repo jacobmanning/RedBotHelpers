@@ -22,9 +22,19 @@ void RedBot::move_forward(const Speed speed, const Time time)
   move::forward(*this, speed, time);
 }
 
+void RedBot::move_forward(const Time time)
+{
+  move_forward(MEDIUM_SPEED, time);
+}
+
 void RedBot::move_backward(const Speed speed, const Time time)
 {
   move::backward(*this, speed, time);
+}
+
+void RedBot::move_backward(const Time time)
+{
+  move_backward(MEDIUM_SPEED, time);
 }
 
 void blink_led(const int pin, const Time wait_time)
@@ -100,7 +110,7 @@ void pivot_right(RedBot& redbot, const Speed speed, const Angle angle)
 
 void pivot_right(RedBot& redbot, const Angle angle)
 {
-  pivot_right(redbot, Speed(100), angle);
+  pivot_right(redbot, MEDIUM_SPEED, angle);
 }
 
 void pivot_left(RedBot& redbot, const Speed speed, const Angle angle)
@@ -110,7 +120,7 @@ void pivot_left(RedBot& redbot, const Speed speed, const Angle angle)
 
 void pivot_left(RedBot& redbot, const Angle angle)
 {
-  pivot_left(redbot, Speed(100), angle);
+  pivot_left(redbot, MEDIUM_SPEED, angle);
 }
 
 }  // namespace v1
@@ -170,7 +180,7 @@ void turn(RedBot& redbot, const Speed speed, const Angle angle)
     }
     else
     {
-      motors.leftMotor(0);
+      motors.leftMotor(MOTORS_STOP);
     }
 
     if (rotate_right)
@@ -179,7 +189,7 @@ void turn(RedBot& redbot, const Speed speed, const Angle angle)
     }
     else
     {
-      motors.rightMotor(0);
+      motors.rightMotor(MOTORS_STOP);
     }
   }
 }
@@ -191,7 +201,7 @@ void pivot_right(RedBot& redbot, const Speed speed, const Angle angle)
 
 void pivot_right(RedBot& redbot, const Angle angle)
 {
-  pivot_right(redbot, Speed(100), angle);
+  pivot_right(redbot, MEDIUM_SPEED, angle);
 }
 
 void pivot_left(RedBot& redbot, const Speed speed, const Angle angle)
@@ -201,7 +211,7 @@ void pivot_left(RedBot& redbot, const Speed speed, const Angle angle)
 
 void pivot_left(RedBot& redbot, const Angle angle)
 {
-  pivot_left(redbot, Speed(100), angle);
+  pivot_left(redbot, MEDIUM_SPEED, angle);
 }
 
 } // namespace v2

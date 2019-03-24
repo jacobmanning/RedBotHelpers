@@ -12,10 +12,15 @@ constexpr int LED_PIN = 13;
 constexpr int COUNTS_PER_REV = 192;
 constexpr int LEFT_ENCODER_PIN = A2;
 constexpr int RIGHT_ENCODER_PIN = 10;
+constexpr int MOTORS_STOP = 0;
 
 using Speed = util::named_type<int, struct SpeedTag>;
 using Time = util::named_type<int, struct TimeTag>;
 using Angle = util::named_type<int, struct AngleTag>;
+
+const Speed LOW_SPEED = Speed{80};
+const Speed MEDIUM_SPEED = Speed{160};
+const Speed HIGH_SPEED = Speed{240};
 
 class RedBot
 {
@@ -26,7 +31,10 @@ public:
   RedBotEncoder& get_encoder();
 
   void move_forward(const Speed, const Time);
+  void move_forward(const Time);
+
   void move_backward(const Speed, const Time);
+  void move_backward(const Time);
 
 private:
   RedBotMotors motors_;

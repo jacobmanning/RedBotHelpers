@@ -17,16 +17,16 @@ ln -s /abs/path/to/RedBotHelpers /home/$USER/Arduino/libraries/RedBotHelpers
 
 ## Basic Usage
 ```C++
-// examples/hello_redbots/hello_redbots.ino
+// FILE: examples/basic/basic.ino
 #include <RedBotHelpers.h>
 
-auto my_redbot = redbot::init();
+auto my_redbot = RedBot();
 
 void setup() {}
 
 void loop()
 {
-  my_redbot.move_forward(Speed(200), Time(2000));
-  my_redbot.move_backward(Speed(200), Time(2000));
+  my_redbot.move_forward(Time(2000));
+  my_redbot.move_backward(Time(2000));
 }
 ```
