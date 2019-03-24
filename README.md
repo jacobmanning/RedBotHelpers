@@ -3,26 +3,30 @@
 Library to help learn how to use Redbots
 
 ## Installation
+### ZIP
+1. Download library as zip
+1. Arduino IDE -> Sketch -> Include Library -> Add ZIP Library
+
+### Git clone
 ```
 git clone https://github.com/jacobmanning/redbot_helpers
-cd redbot_helpers
+ln -s /abs/path/to/redbot_helpers /home/$USER/Arduino/libraries/redbot_helpers
 ```
 
-+ Create a new sketch in the cloned repo
+**Note:** This library depends on the SparkFun RedBot library
 
 ## Basic Usage
 ```
-// hello_redbots.ino
-#include <RedBot.h>
-#include "redbot_helpers.hh"
+// examples/hello_redbots/hello_redbots.ino
+#include <redbot_helpers.hh>
 
-auto motors = RedBotMotors();
+auto my_redbot = redbot::init();
 
 void setup() {}
 
 void loop()
 {
-  redbot::move::forward(motors, Speed(200), Time(2000));
-  redbot::move::backward(motors, Speed(200), Time(2000));
+  my_redbot.move_forward(Speed(200), Time(2000));
+  my_redbot.move_backward(Speed(200), Time(2000));
 }
 ```
