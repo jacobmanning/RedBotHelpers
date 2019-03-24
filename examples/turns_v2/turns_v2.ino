@@ -1,6 +1,6 @@
 #include <RedBotHelpers.h>
 
-auto gonk = redbot::init();
+auto gonk = RedBot();
 
 void test_pivot(const int angle)
 {

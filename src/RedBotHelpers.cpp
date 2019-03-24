@@ -27,11 +27,6 @@ void RedBot::move_backward(const Speed speed, const Time time)
   move::backward(*this, speed, time);
 }
 
-RedBot init()
-{
-  return RedBot();
-}
-
 void blink_led(const int pin, const Time wait_time)
 {
   pinMode(pin, OUTPUT);

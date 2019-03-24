@@ -21,7 +21,6 @@ get_motors	KEYWORD2
 get_encoder	KEYWORD2
 move_forward	KEYWORD2
 move_backward	KEYWORD2
-init	KEYWORD2
 
 forward	KEYWORD2
 backward	KEYWORD2

@@ -33,9 +33,6 @@ private:
   RedBotEncoder encoder_;
 };
 
-/// Creates a new RedBot object
-RedBot init();
-
 /// Basic function to blink LED
 void blink_led(const int pin, const Time);
 

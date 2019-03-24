@@ -7,5 +7,6 @@
 using redbot::Speed;
 using redbot::Time;
 using redbot::Angle;
+using redbot::RedBot;
 
 #endif  // REDBOT_HELPERS_H_
