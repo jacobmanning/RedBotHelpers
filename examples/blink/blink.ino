@@ -1,4 +1,3 @@
-#include <RedBot.h>
 #include <redbot_helpers.hh>
 
 void setup() {}
