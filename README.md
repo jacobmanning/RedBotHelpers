@@ -9,8 +9,8 @@ Library to help learn how to use Redbots
 
 ### Git clone
 ```
-git clone https://github.com/jacobmanning/redbot_helpers
-ln -s /abs/path/to/redbot_helpers /home/$USER/Arduino/libraries/redbot_helpers
+git clone https://github.com/jacobmanning/RedBotHelpers
+ln -s /abs/path/to/RedBotHelpers /home/$USER/Arduino/libraries/RedBotHelpers
 ```
 
 **Note:** This library depends on the SparkFun RedBot library
