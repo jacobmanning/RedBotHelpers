@@ -71,63 +71,6 @@ void backward(RedBot& redbot, const Speed speed, const Time time)
 namespace experimental
 {
 
-namespace v1
-{
-
-void turn(RedBotMotors& motors, const Speed speed, const Angle angle)
-{
-  motors.rightMotor(speed.get());
-  motors.leftMotor(speed.get());
-
-  if (angle.get() <= 90)
-  {
-    delay(angle.get() * 12);
-  }
-  else if (angle.get() <= 90)
-  {
-    delay(angle.get() * 9);
-  }
-  else if (angle.get() <= 180)
-  {
-    delay(angle.get() * 8);
-  }
-  else if (angle.get() <= 270)
-  {
-    delay(angle.get() * 7);
-  }
-  else if (angle.get() < 360)
-  {
-    delay(angle.get() * 4);
-  }
-
-  motors.stop();
-}
-
-void pivot_right(RedBot& redbot, const Speed speed, const Angle angle)
-{
-  turn(redbot.get_motors(), Speed(-speed.get()), angle);
-}
-
-void pivot_right(RedBot& redbot, const Angle angle)
-{
-  pivot_right(redbot, MEDIUM_SPEED, angle);
-}
-
-void pivot_left(RedBot& redbot, const Speed speed, const Angle angle)
-{
-  turn(redbot.get_motors(), speed, angle);
-}
-
-void pivot_left(RedBot& redbot, const Angle angle)
-{
-  pivot_left(redbot, MEDIUM_SPEED, angle);
-}
-
-}  // namespace v1
-
-namespace v2
-{
-
 boolean check_if_right_turn(const Speed speed)
 {
   return speed.get() < 0;
@@ -213,8 +156,6 @@ void pivot_left(RedBot& redbot, const Angle angle)
 {
   pivot_left(redbot, MEDIUM_SPEED, angle);
 }
-
-} // namespace v2
 
 }  // namespace experimental
 

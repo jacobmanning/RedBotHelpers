@@ -64,27 +64,11 @@ void backward(RedBot&, const Speed, const Time);
 namespace experimental
 {
 
-namespace v1
-{
-
 void pivot_right(RedBot&, const Angle);
 void pivot_right(RedBot&, const Speed, const Angle);
 
 void pivot_left(RedBot&, const Angle);
 void pivot_left(RedBot&, const Speed, const Angle);
-
-}  // namespace v1
-
-namespace v2
-{
-
-void pivot_right(RedBot&, const Angle);
-void pivot_right(RedBot&, const Speed, const Angle);
-
-void pivot_left(RedBot&, const Angle);
-void pivot_left(RedBot&, const Speed, const Angle);
-
-}  // namespace v2
 
 }  // namespace experimental
 

@@ -4,8 +4,8 @@ auto gonk = RedBot();
 
 void test_pivot(const int angle)
 {
-  redbot::experimental::v2::pivot_right(gonk, Angle(angle));
-  redbot::experimental::v2::pivot_left(gonk, Angle(angle));
+  redbot::experimental::pivot_right(gonk, Angle(angle));
+  redbot::experimental::pivot_left(gonk, Angle(angle));
 }
 
 void setup()
@@ -16,6 +16,6 @@ void setup()
 void loop()
 {
   test_pivot(90);
-  //test_pivot(180);
-  //test_pivot(270);
+  // test_pivot(180);
+  // test_pivot(270);
 }
