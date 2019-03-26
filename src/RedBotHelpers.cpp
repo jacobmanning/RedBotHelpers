@@ -17,27 +17,47 @@ RedBotEncoder& RedBot::get_encoder()
   return encoder_;
 }
 
-void RedBot::move_forward(const Speed speed, const Time time)
+void RedBot::move_forward(const Speed speed, const Milliseconds duration_ms)
 {
-  move::forward(*this, speed, time);
+  move::forward(*this, speed, duration_ms);
 }
 
-void RedBot::move_forward(const Time time)
+void RedBot::move_forward(const Milliseconds duration_ms)
 {
-  move_forward(MEDIUM_SPEED, time);
+  move_forward(MEDIUM_SPEED, duration_ms);
 }
 
-void RedBot::move_backward(const Speed speed, const Time time)
+void RedBot::move_forward(const Speed speed, const Seconds duration_s)
 {
-  move::backward(*this, speed, time);
+  move_forward(speed, Milliseconds(duration_s.get() * 1000));
 }
 
-void RedBot::move_backward(const Time time)
+void RedBot::move_forward(const Seconds duration_s)
 {
-  move_backward(MEDIUM_SPEED, time);
+  move_forward(MEDIUM_SPEED, duration_s);
 }
 
-void blink_led(const int pin, const Time wait_time)
+void RedBot::move_backward(const Speed speed, const Milliseconds duration_ms)
+{
+  move::backward(*this, speed, duration_ms);
+}
+
+void RedBot::move_backward(const Milliseconds duration_ms)
+{
+  move_backward(MEDIUM_SPEED, duration_ms);
+}
+
+void RedBot::move_backward(const Speed speed, const Seconds duration_s)
+{
+  move_backward(speed, Milliseconds(duration_s.get() * 1000));
+}
+
+void RedBot::move_backward(const Seconds duration_s)
+{
+  move_backward(MEDIUM_SPEED, duration_s);
+}
+
+void blink_led(const int pin, const Milliseconds wait_time)
 {
   pinMode(pin, OUTPUT);
   digitalWrite(pin, HIGH);
@@ -49,21 +69,31 @@ void blink_led(const int pin, const Time wait_time)
 namespace move
 {
 
-void go_straight(RedBotMotors& motors, const Speed speed, const Time time)
+void go_straight(RedBotMotors& motors, const Speed speed, const Milliseconds duration_ms)
 {
   motors.drive(speed.get());
-  delay(time.get());
+  delay(duration_ms.get());
   motors.stop();
 }
 
-void forward(RedBot& redbot, const Speed speed, const Time time)
+void forward(RedBot& redbot, const Speed speed, const Milliseconds duration_ms)
 {
-  go_straight(redbot.get_motors(), speed, time);
+  go_straight(redbot.get_motors(), speed, duration_ms);
 }
 
-void backward(RedBot& redbot, const Speed speed, const Time time)
+void backward(RedBot& redbot, const Speed speed, const Milliseconds duration_ms)
 {
-  go_straight(redbot.get_motors(), Speed(-speed.get()), time);
+  go_straight(redbot.get_motors(), Speed(-speed.get()), duration_ms);
+}
+
+void forward(RedBot& redbot, const Speed speed, const Seconds duration_s)
+{
+  forward(redbot, speed, Milliseconds(duration_s.get() * 1000));
+}
+
+void backward(RedBot& redbot, const Speed speed, const Seconds duration_s)
+{
+  backward(redbot, speed, Milliseconds(duration_s.get() * 1000));
 }
 
 }  // namespace move

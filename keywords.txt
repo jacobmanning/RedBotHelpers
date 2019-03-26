@@ -9,7 +9,8 @@
 RedBotHelpers	KEYWORD1
 RedBot	KEYWORD1
 Speed	KEYWORD1
-Time	KEYWORD1
+Milliseconds	KEYWORD1
+Seconds	KEYWORD1
 Angle	KEYWORD1
 
 #######################################

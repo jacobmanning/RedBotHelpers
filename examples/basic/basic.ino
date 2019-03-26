@@ -6,6 +6,6 @@ void setup() {}
 
 void loop()
 {
-  gonk.move_forward(Time(2000));
-  gonk.move_backward(Time(2000));
+  gonk.move_forward(Seconds(2));
+  gonk.move_backward(Seconds(2));
 }

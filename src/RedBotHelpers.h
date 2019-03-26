@@ -5,7 +5,10 @@
 #include "include/RedBotHelpersImpl.hh"
 
 using redbot::Speed;
-using redbot::Time;
+
+using redbot::Seconds;
+using redbot::Milliseconds;
+
 using redbot::Angle;
 using redbot::RedBot;
 
