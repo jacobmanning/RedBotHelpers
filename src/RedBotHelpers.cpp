@@ -22,6 +22,11 @@ void RedBot::move_forward(const Speed speed, const Milliseconds duration_ms)
   move::forward(*this, speed, duration_ms);
 }
 
+void RedBot::move_forward(const Speed speed, const Millimeters distance_mm)
+{
+  move::forward(*this, speed, distance_mm);
+}
+
 void RedBot::move_forward(const Milliseconds duration_ms)
 {
   move_forward(MEDIUM_SPEED, duration_ms);
@@ -37,9 +42,40 @@ void RedBot::move_forward(const Seconds duration_s)
   move_forward(MEDIUM_SPEED, duration_s);
 }
 
+void RedBot::move_forward(const Millimeters distance_mm)
+{
+  move_forward(MEDIUM_SPEED, distance_mm);
+}
+
+void RedBot::move_forward(const Speed speed, const Centimeters distance_cm)
+{
+  move_forward(speed, Millimeters(distance_cm.get() * 10));
+}
+
+void RedBot::move_forward(const Centimeters distance_cm)
+{
+  move_forward(MEDIUM_SPEED, distance_cm);
+}
+
+void RedBot::move_forward(const Speed speed, const Meters distance_m)
+{
+  move_forward(speed, Millimeters(distance_m.get() * 1000));
+}
+
+void RedBot::move_forward(const Meters distance_m)
+{
+
+  move_forward(MEDIUM_SPEED, distance_m);
+}
+
 void RedBot::move_backward(const Speed speed, const Milliseconds duration_ms)
 {
   move::backward(*this, speed, duration_ms);
+}
+
+void RedBot::move_backward(const Speed speed, const Millimeters distance_mm)
+{
+  move::backward(*this, speed, distance_mm);
 }
 
 void RedBot::move_backward(const Milliseconds duration_ms)
@@ -55,6 +91,32 @@ void RedBot::move_backward(const Speed speed, const Seconds duration_s)
 void RedBot::move_backward(const Seconds duration_s)
 {
   move_backward(MEDIUM_SPEED, duration_s);
+}
+
+void RedBot::move_backward(const Millimeters distance_mm)
+{
+  move_backward(MEDIUM_SPEED, distance_mm);
+}
+
+void RedBot::move_backward(const Speed speed, const Centimeters distance_cm)
+{
+  move_backward(speed, Millimeters(distance_cm.get() * 10));
+}
+
+void RedBot::move_backward(const Centimeters distance_cm)
+{
+  move_backward(MEDIUM_SPEED, distance_cm);
+}
+
+void RedBot::move_backward(const Speed speed, const Meters distance_m)
+{
+  move_backward(speed, Millimeters(distance_m.get() * 1000));
+}
+
+void RedBot::move_backward(const Meters distance_m)
+{
+
+  move_backward(MEDIUM_SPEED, distance_m);
 }
 
 void blink_led(const int pin, const Milliseconds wait_time)
@@ -76,14 +138,58 @@ void go_straight(RedBotMotors& motors, const Speed speed, const Milliseconds dur
   motors.stop();
 }
 
+void go_straight(RedBot& redbot, const Speed speed, const Millimeters distance_mm)
+{
+  auto& encoder = redbot.get_encoder();
+  encoder.clearEnc(BOTH);
+
+  auto& motors = redbot.get_motors();
+
+  auto current_ticks = int{0};
+  const auto expected_rotations = move::mm_to_rotations(distance_mm);
+  Serial.print("[ DEBUG ] expected_rotations = ");
+  Serial.println(expected_rotations);
+
+  while (current_ticks < expected_rotations)
+  {
+    const auto left_ticks = abs(encoder.getTicks(LEFT));
+    const auto right_ticks = abs(encoder.getTicks(RIGHT));
+
+    current_ticks += abs(max(left_ticks, right_ticks));
+
+    Serial.print("[ DEBUG ] current_ticks = ");
+    Serial.print(current_ticks);
+    Serial.print(", desired_rotations = ");
+    Serial.println(expected_rotations);
+    Serial.print("[ DEBUG ] distance_travelled = ");
+    Serial.print(rotations_to_mm(current_ticks).get());
+    Serial.print("mm");
+    Serial.println();
+
+    motors.drive(speed.get());
+  }
+
+  motors.stop();
+}
+
 void forward(RedBot& redbot, const Speed speed, const Milliseconds duration_ms)
 {
   go_straight(redbot.get_motors(), speed, duration_ms);
 }
 
+void forward(RedBot& redbot, const Speed speed, const Millimeters distance_mm)
+{
+  go_straight(redbot, speed, distance_mm);
+}
+
 void backward(RedBot& redbot, const Speed speed, const Milliseconds duration_ms)
 {
   go_straight(redbot.get_motors(), Speed(-speed.get()), duration_ms);
+}
+
+void backward(RedBot& redbot, const Speed speed, const Millimeters distance_mm)
+{
+  go_straight(redbot, Speed(-speed.get()), distance_mm);
 }
 
 void forward(RedBot& redbot, const Speed speed, const Seconds duration_s)
@@ -94,6 +200,16 @@ void forward(RedBot& redbot, const Speed speed, const Seconds duration_s)
 void backward(RedBot& redbot, const Speed speed, const Seconds duration_s)
 {
   backward(redbot, speed, Milliseconds(duration_s.get() * 1000));
+}
+
+int mm_to_rotations(const Millimeters distance_mm)
+{
+  return static_cast<int>(distance_mm.get() * MM_PER_REV / COUNTS_PER_REV);
+}
+
+Millimeters rotations_to_mm(const int rotations)
+{
+  return Millimeters(rotations * COUNTS_PER_REV / MM_PER_REV);
 }
 
 }  // namespace move
