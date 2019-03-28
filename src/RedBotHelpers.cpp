@@ -1,5 +1,6 @@
 #include <RedBot.h>
 #include "include/RedBotHelpersImpl.hh"
+#include "include/Units.hh"
 
 namespace redbot
 {
@@ -34,7 +35,7 @@ void RedBot::move_forward(const Milliseconds duration_ms)
 
 void RedBot::move_forward(const Speed speed, const Seconds duration_s)
 {
-  move_forward(speed, Milliseconds(duration_s.get() * 1000));
+  move_forward(speed, units::s_to_ms(duration_s));
 }
 
 void RedBot::move_forward(const Seconds duration_s)
@@ -49,7 +50,7 @@ void RedBot::move_forward(const Millimeters distance_mm)
 
 void RedBot::move_forward(const Speed speed, const Centimeters distance_cm)
 {
-  move_forward(speed, Millimeters(distance_cm.get() * 10));
+  move_forward(speed, units::cm_to_mm(distance_cm));
 }
 
 void RedBot::move_forward(const Centimeters distance_cm)
@@ -59,7 +60,7 @@ void RedBot::move_forward(const Centimeters distance_cm)
 
 void RedBot::move_forward(const Speed speed, const Meters distance_m)
 {
-  move_forward(speed, Millimeters(distance_m.get() * 1000));
+  move_forward(speed, units::m_to_mm(distance_m));
 }
 
 void RedBot::move_forward(const Meters distance_m)
@@ -85,7 +86,7 @@ void RedBot::move_backward(const Milliseconds duration_ms)
 
 void RedBot::move_backward(const Speed speed, const Seconds duration_s)
 {
-  move_backward(speed, Milliseconds(duration_s.get() * 1000));
+  move_backward(speed, units::s_to_ms(duration_s));
 }
 
 void RedBot::move_backward(const Seconds duration_s)
@@ -100,7 +101,7 @@ void RedBot::move_backward(const Millimeters distance_mm)
 
 void RedBot::move_backward(const Speed speed, const Centimeters distance_cm)
 {
-  move_backward(speed, Millimeters(distance_cm.get() * 10));
+  move_backward(speed, units::cm_to_mm(distance_cm));
 }
 
 void RedBot::move_backward(const Centimeters distance_cm)
@@ -110,7 +111,7 @@ void RedBot::move_backward(const Centimeters distance_cm)
 
 void RedBot::move_backward(const Speed speed, const Meters distance_m)
 {
-  move_backward(speed, Millimeters(distance_m.get() * 1000));
+  move_backward(speed, units::m_to_mm(distance_m));
 }
 
 void RedBot::move_backward(const Meters distance_m)
@@ -126,6 +127,11 @@ void blink_led(const int pin, const Milliseconds wait_time)
   delay(wait_time.get());
   digitalWrite(pin, LOW);
   delay(wait_time.get());
+}
+
+void blink_led(const int pin, const Seconds duration_s)
+{
+  blink_led(pin, units::s_to_ms(duration_s));
 }
 
 int mm_to_ticks(const Millimeters distance_mm)
@@ -169,6 +175,11 @@ void go_straight(RedBot& redbot, const Speed speed, const Millimeters distance_m
   motors.stop();
 }
 
+Speed to_backward_speed(const Speed forward_speed)
+{
+  return Speed(-forward_speed.get());
+}
+
 void forward(RedBot& redbot, const Speed speed, const Milliseconds duration_ms)
 {
   go_straight(redbot.get_motors(), speed, duration_ms);
@@ -181,22 +192,22 @@ void forward(RedBot& redbot, const Speed speed, const Millimeters distance_mm)
 
 void backward(RedBot& redbot, const Speed speed, const Milliseconds duration_ms)
 {
-  go_straight(redbot.get_motors(), Speed(-speed.get()), duration_ms);
+  go_straight(redbot.get_motors(), to_backward_speed(speed), duration_ms);
 }
 
 void backward(RedBot& redbot, const Speed speed, const Millimeters distance_mm)
 {
-  go_straight(redbot, Speed(-speed.get()), distance_mm);
+  go_straight(redbot, to_backward_speed(speed), distance_mm);
 }
 
 void forward(RedBot& redbot, const Speed speed, const Seconds duration_s)
 {
-  forward(redbot, speed, Milliseconds(duration_s.get() * 1000));
+  forward(redbot, speed, units::s_to_ms(duration_s));
 }
 
 void backward(RedBot& redbot, const Speed speed, const Seconds duration_s)
 {
-  backward(redbot, speed, Milliseconds(duration_s.get() * 1000));
+  backward(redbot, speed, units::s_to_ms(duration_s));
 }
 
 }  // namespace move
@@ -274,7 +285,7 @@ void turn(RedBot& redbot, const Speed speed, const Angle angle)
 
 void pivot_right(RedBot& redbot, const Speed speed, const Angle angle)
 {
-  turn(redbot, Speed(-speed.get()), angle);
+  turn(redbot, move::to_backward_speed(speed), angle);
 }
 
 void pivot_right(RedBot& redbot, const Angle angle)

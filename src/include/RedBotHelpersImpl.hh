@@ -83,6 +83,11 @@ private:
 /// @param  Milliseconds  The duration the LED should stay on
 void blink_led(const int pin, const Milliseconds);
 
+/// Basic function to blink LED
+/// @param  pin   The pin to blink (LED_PIN = 13 for redbot)
+/// @param  Seconds  The duration the LED should stay on
+void blink_led(const int pin, const Seconds);
+
 /// Convert mm to encoder ticks to travel that distance
 /// @param Millimeters  The distance to convert to encoder ticks
 /// @return   The number of encoder ticks to travel the argument distance

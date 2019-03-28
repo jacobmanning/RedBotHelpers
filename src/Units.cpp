@@ -57,3 +57,23 @@ redbot::Angle operator"" _deg(unsigned long long value)
 {
   return redbot::Angle(value);
 }
+
+namespace units
+{
+
+redbot::Millimeters m_to_mm(const redbot::Meters distance_m)
+{
+  return redbot::Millimeters(distance_m.get() * M_TO_MM);
+}
+
+redbot::Millimeters cm_to_mm(const redbot::Centimeters distance_cm)
+{
+  return redbot::Millimeters(distance_cm.get() * CM_TO_MM);
+}
+
+redbot::Milliseconds s_to_ms(const redbot::Seconds duration_s)
+{
+  return redbot::Milliseconds(duration_s.get() * S_TO_MS);
+}
+
+}  // namespace units

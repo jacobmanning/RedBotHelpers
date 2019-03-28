@@ -23,4 +23,18 @@ redbot::Centimeters operator"" _cm(long double value);
 redbot::Angle operator"" _degrees(unsigned long long value);
 redbot::Angle operator"" _deg(unsigned long long value);
 
+namespace units
+{
+
+constexpr static int M_TO_MM = 1000;
+constexpr static int CM_TO_MM = 10;
+constexpr static int S_TO_MS = 1000;
+
+redbot::Millimeters m_to_mm(const redbot::Meters);
+redbot::Millimeters cm_to_mm(const redbot::Centimeters);
+
+redbot::Milliseconds s_to_ms(const redbot::Seconds);
+
+}  // namespace units
+
 #endif  // UNITS_H_
