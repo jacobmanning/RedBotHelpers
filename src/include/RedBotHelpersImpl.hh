@@ -13,7 +13,6 @@ constexpr static int COUNTS_PER_REV = 192;
 constexpr static double MM_PER_REV = 204.216;
 constexpr static int LEFT_ENCODER_PIN = A2;
 constexpr static int RIGHT_ENCODER_PIN = 10;
-constexpr static int MOTORS_STOP = 0;
 
 /// Alias strong type for a degree the redbot will turn
 /// _deg and _degrees literal operators

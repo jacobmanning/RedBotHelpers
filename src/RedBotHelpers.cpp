@@ -149,9 +149,7 @@ namespace move
 
 void go_straight(RedBotMotors& motors, const Speed speed, const Milliseconds duration_ms)
 {
-  motors.drive(speed.get());
-  delay(duration_ms.get());
-  motors.stop();
+  motors.drive(speed.get(), duration_ms.get());
 }
 
 void go_straight(RedBot& redbot, const Speed speed, const Millimeters distance_mm)
@@ -266,7 +264,7 @@ void turn(RedBot& redbot, const Speed speed, const Angle angle)
     }
     else
     {
-      motors.leftMotor(MOTORS_STOP);
+      motors.leftStop();
     }
 
     if (rotate_right)
@@ -275,12 +273,12 @@ void turn(RedBot& redbot, const Speed speed, const Angle angle)
     }
     else
     {
-      motors.rightMotor(MOTORS_STOP);
+      motors.rightStop();
     }
   }
 
-  motors.leftMotor(MOTORS_STOP);
-  motors.rightMotor(MOTORS_STOP);
+  motors.leftStop();
+  motors.rightStop();
 }
 
 void pivot_right(RedBot& redbot, const Speed speed, const Angle angle)
