@@ -4,7 +4,7 @@ Library to help learn how to use Redbots
 
 ## Installation
 ### RedBot
-**Note:** This library depends on the [SparkFun RedBot library](https://github.com/sparkfun/SparkFun_RedBot_Arduino_Library), you _must_ install that before installing this library
++ **Note:** This library depends on the [SparkFun RedBot library](https://github.com/sparkfun/SparkFun_RedBot_Arduino_Library), you _must_ install that before installing this library
 
 ### ZIP
 1. Download library as zip
