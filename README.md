@@ -3,17 +3,15 @@
 Library to help learn how to use Redbots
 
 ## Installation
+### RedBot
++ **Note:** This library depends on the [SparkFun RedBot library](https://github.com/sparkfun/SparkFun_RedBot_Arduino_Library), you _must_ install that before installing this library
+
 ### ZIP
 1. Download library as zip
 1. Arduino IDE -> Sketch -> Include Library -> Add ZIP Library
 
-### Git clone
-```
-git clone https://github.com/jacobmanning/RedBotHelpers
-ln -s /abs/path/to/RedBotHelpers /home/$USER/Arduino/libraries/RedBotHelpers
-```
-
-**Note:** This library depends on the SparkFun RedBot library
+### Library Manager
++ Coming soon!
 
 ## Basic Usage
 ```C++
@@ -26,7 +24,7 @@ void setup() {}
 
 void loop()
 {
-  my_redbot.move_forward(Time(2000));
-  my_redbot.move_backward(Time(2000));
+  my_redbot.move_forward(2_s);
+  my_redbot.move_backward(2_s);
 }
 ```

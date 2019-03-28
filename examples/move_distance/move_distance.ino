@@ -7,10 +7,10 @@ void setup() {}
 void loop()
 {
   // Explicit types
-  gonk.move_forward(Seconds(2));
-  gonk.move_backward(Seconds(2));
+  gonk.move_forward(Meters(1));
+  gonk.move_backward(Meters(1));
 
   // Literal operator conversions
-  gonk.move_forward(2_s);
-  gonk.move_backward(2_s);
+  gonk.move_forward(0.5_m);
+  gonk.move_backward(0.5_m);
 }
