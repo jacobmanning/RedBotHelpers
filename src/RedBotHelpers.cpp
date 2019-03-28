@@ -128,6 +128,16 @@ void blink_led(const int pin, const Milliseconds wait_time)
   delay(wait_time.get());
 }
 
+int mm_to_ticks(const Millimeters distance_mm)
+{
+  return static_cast<int>(distance_mm.get() * MM_PER_REV / COUNTS_PER_REV);
+}
+
+Millimeters ticks_to_mm(const int ticks)
+{
+  return Millimeters(ticks * COUNTS_PER_REV / MM_PER_REV);
+}
+
 namespace move
 {
 
@@ -140,33 +150,20 @@ void go_straight(RedBotMotors& motors, const Speed speed, const Milliseconds dur
 
 void go_straight(RedBot& redbot, const Speed speed, const Millimeters distance_mm)
 {
+  auto current_ticks = int{0};
+  const auto expected_ticks = mm_to_ticks(distance_mm);
+
+  auto& motors = redbot.get_motors();
   auto& encoder = redbot.get_encoder();
   encoder.clearEnc(BOTH);
 
-  auto& motors = redbot.get_motors();
+  motors.drive(speed.get());
 
-  auto current_ticks = int{0};
-  const auto expected_rotations = move::mm_to_rotations(distance_mm);
-  Serial.print("[ DEBUG ] expected_rotations = ");
-  Serial.println(expected_rotations);
-
-  while (current_ticks < expected_rotations)
+  while (current_ticks < expected_ticks)
   {
     const auto left_ticks = abs(encoder.getTicks(LEFT));
     const auto right_ticks = abs(encoder.getTicks(RIGHT));
-
-    current_ticks += abs(max(left_ticks, right_ticks));
-
-    Serial.print("[ DEBUG ] current_ticks = ");
-    Serial.print(current_ticks);
-    Serial.print(", desired_rotations = ");
-    Serial.println(expected_rotations);
-    Serial.print("[ DEBUG ] distance_travelled = ");
-    Serial.print(rotations_to_mm(current_ticks).get());
-    Serial.print("mm");
-    Serial.println();
-
-    motors.drive(speed.get());
+    current_ticks = max(left_ticks, right_ticks);
   }
 
   motors.stop();
@@ -202,16 +199,6 @@ void backward(RedBot& redbot, const Speed speed, const Seconds duration_s)
   backward(redbot, speed, Milliseconds(duration_s.get() * 1000));
 }
 
-int mm_to_rotations(const Millimeters distance_mm)
-{
-  return static_cast<int>(distance_mm.get() * MM_PER_REV / COUNTS_PER_REV);
-}
-
-Millimeters rotations_to_mm(const int rotations)
-{
-  return Millimeters(rotations * COUNTS_PER_REV / MM_PER_REV);
-}
-
 }  // namespace move
 
 namespace experimental
@@ -234,17 +221,16 @@ int get_expected_right_ticks(const Angle desired_angle, const boolean is_right_t
 
 void turn(RedBot& redbot, const Speed speed, const Angle angle)
 {
-  auto& encoder = redbot.get_encoder();
-  encoder.clearEnc(BOTH);
-
-  auto& motors = redbot.get_motors();
-
   const auto is_right_turn = check_if_right_turn(speed);
   const auto expected_left_ticks = get_expected_left_ticks(angle, is_right_turn);
   const auto expected_right_ticks = get_expected_right_ticks(angle, is_right_turn);
 
   auto rotate_left = true;
   auto rotate_right = true;
+
+  auto& motors = redbot.get_motors();
+  auto& encoder = redbot.get_encoder();
+  encoder.clearEnc(BOTH);
 
   while (rotate_left || rotate_right)
   {
@@ -281,6 +267,9 @@ void turn(RedBot& redbot, const Speed speed, const Angle angle)
       motors.rightMotor(MOTORS_STOP);
     }
   }
+
+  motors.leftMotor(MOTORS_STOP);
+  motors.rightMotor(MOTORS_STOP);
 }
 
 void pivot_right(RedBot& redbot, const Speed speed, const Angle angle)

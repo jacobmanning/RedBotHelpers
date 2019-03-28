@@ -2,12 +2,15 @@
 
 auto gonk = RedBot();
 
-void setup() {
-  Serial.begin(9600);
-}
+void setup() {}
 
 void loop()
 {
-  gonk.move_forward(Speed(255), 1_m);
-  gonk.move_backward(Speed(255), 1_m);
+  // Explicit types
+  gonk.move_forward(Meters(1));
+  gonk.move_backward(Meters(1));
+
+  // Literal operator conversions
+  gonk.move_forward(0.5_m);
+  gonk.move_backward(0.5_m);
 }

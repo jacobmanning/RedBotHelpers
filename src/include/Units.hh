@@ -20,4 +20,7 @@ redbot::Millimeters operator"" _mm(long double value);
 redbot::Centimeters operator"" _cm(unsigned long long value);
 redbot::Centimeters operator"" _cm(long double value);
 
+redbot::Angle operator"" _degrees(unsigned long long value);
+redbot::Angle operator"" _deg(unsigned long long value);
+
 #endif  // UNITS_H_

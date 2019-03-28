@@ -47,3 +47,13 @@ redbot::Centimeters operator"" _cm(long double value)
 {
   return redbot::Centimeters(value);
 }
+
+redbot::Angle operator"" _degrees(unsigned long long value)
+{
+  return redbot::Angle(value);
+}
+
+redbot::Angle operator"" _deg(unsigned long long value)
+{
+  return redbot::Angle(value);
+}
